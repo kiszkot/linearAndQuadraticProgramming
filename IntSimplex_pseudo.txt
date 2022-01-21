@@ -1,0 +1,26 @@
+function [x,v,optimal] = zsimplex(A,b,c,z) # z - which are integers
+1. simplex2F
+2. check integers (reminder of division by 1 gives 0 if integer)
+	logical(~rem(x(z),1)) = 1|0 # 1 - if not 0, 0 - if 0
+	# enclose in function ?
+3. if not integer -> split
+	if min(test) == 0 # test is enclosing function of last step
+4. check if degenerate
+	if degenerate
+		x = [ ] fc = -inf
+	else 5.
+5. split
+	id = find(~logical(~rem(x(z),1)))
+6. add new elements to A,b,c
+	cr = [c,0]
+	b1 = [b;floor(x(z(id)))]
+	A1 = A
+	A1(end+1,[z(id(1)),end+1) = [1,1]
+7. solve left split
+	zsimplex
+8. solve right split
+	b2 = ...
+	...
+	zimplex
+9. choose solution with bigger fc
+	both splits can be degenerate, decide what to do

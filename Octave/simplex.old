@@ -1,0 +1,58 @@
+# Simplex function
+# Krystian Baran
+
+function [B,b,optimal] = simplex(A,b,c,baseSize)
+  
+  [len,x] = size(b);
+  if len <= x b = transpose(b); endif
+  
+  B = '';
+  C = '';
+  [len,x] = size(c);
+  if len <= x c = transpose(c); endif
+  for i=1:len
+    if i <= baseSize
+      C = [C ; 'x',num2str(i)];
+    else
+      C = [C ; 's',num2str(i-baseSize)];
+      B = [B ; 's',num2str(i-baseSize)];
+    endif
+  endfor
+  
+  base = zeros(baseSize,1);
+  z = zeros(len,1);
+  cz = zeros(len,1);
+
+  head = 0; optimal = 0;
+  x = 0;  ix = 0;
+  y = 0;  iy = 0;
+  
+  while(true)
+  
+    for i=1:len
+       z(i) = transpose(base) * A(:,i);
+       cz(i) = c(i) - z(i);
+    endfor
+    optimal = transpose(base) * b;
+    
+    [x, ix] = max(cz);
+    if x<=0
+      break;
+    endif
+    [y, iy] = min(b./A(:,ix));
+    base(iy,:) = c(ix,:);
+    B(iy,:) = C(ix,:);
+    
+    head = A(iy,ix);
+    A(iy,:) = A(iy,:) / head;
+    b(iy,:) = b(iy,:) / head;
+    for i=1:baseSize
+      if i==iy continue; endif
+      head = A(i,ix);
+      A(i,:) = A(i,:) - head*A(iy,:);
+      b(i,:) = b(i,:) - head*b(iy,:);
+    endfor
+  
+  endwhile
+  
+endfunction
