@@ -18,6 +18,7 @@ if isempty(solution1)
     return;
 end
 
+k = [];
 if length(solution1)==1
   sol = double([struct2cell(solution1){:}]);
 else
