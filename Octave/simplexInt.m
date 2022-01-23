@@ -1,6 +1,27 @@
 # Simplex Integer numbers
 # GNU Octave
 # Krystian Baran
+#
+# Input:
+# A - Matrix containing binding equalities.
+# b - Left side of the equalities
+# c - Function to maximise, has to contain added variables
+# zaum - Idexes of which variables have to be integers
+#
+# Output:
+# x - The solution to the problem, contains variables, the added variables
+#     and variables of the added base.
+# v - A vector of which variables are in the base.
+# optimal - Is the optimal value for the given simplex problem
+# C - A vector containing the names of the variables.
+#     x named ones are from the function
+#     s named ones are the added ones
+#     a named ones are from the fake base, they sould always be 0
+#     Note that the solution can have more s values than the staring problem.
+#     This is because new s values are added to have integer solutions.
+#     If you want to know which ones are from this addition just count from the
+#     first s how many you had at the beginning. The rest are from the integer
+#     algorithm
 
 function [x,v,optimal,C] = simplexInt(A,b,c,zaum)
   

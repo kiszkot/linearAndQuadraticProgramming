@@ -1,6 +1,22 @@
 % Simplex fake base function
 % Krystian Baran
 # GNU Octave
+#
+# Input:
+# A - Matrix containing binding equalities.
+# b - Left side of the equalities
+# c - Function to maximise, has to contain added variables
+#
+# Output:
+# x - The solution to the problem, contains variables, the added variables
+#     and variables of the added base.
+# v - A vector of which variables are in the base.
+# optimal - Is the optimal value for the given simplex problem
+# C - A vector containing the names of the variables.
+#     x named ones are from the function
+#     s named ones are the added ones
+#     a named ones are from the fake base, they sould always be 0
+
 
 function [x,v,optimal,C] = simplex2F(A,b,c)
 

@@ -1,18 +1,21 @@
 % Simplex function
 % Krystian Baran
+# Gnu Octave
 
-#{
-  c - function to maxize
-  A - simplex matrix
-  b - right side od stuff
-  v - base indexes
-  
-  return:
-  x - result vector
-  v - 
-  optimal - optimal result of function
-  C - string with names of variables
-#}
+# Input:
+# A - Matrix containing binding equalities.
+# b - Left side of the equalities
+# c - Function to maximise, has to contain added variables
+# v - Idexes of which variables are in the base
+#
+# Output:
+# x - The solution to the problem, contains variables, the added variables
+#     and variables of the added base.
+# v - A vector of which variables are in the base.
+# optimal - Is the optimal value for the given simplex problem
+# C - A vector containing the names of the variables.
+#     x named ones are from the function
+#     s named ones are the added ones
 
 function [x,v,optimal,C] = simplex(A,b,c,v)
 

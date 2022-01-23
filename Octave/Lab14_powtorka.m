@@ -1,16 +1,22 @@
 # Powtorka dla chłopaków
 clc, clear;
 
-warning("off","OctSymPy:sym:rationalapprox")
-setenv PYTHON python3
-pkg load symbolic
+c = [2000,2500,1000,1500,700,1200,0,0,0,0,0,0,0];
+A = [2,3,3.5,1,0.5,1.5,1,0,0,0,0,0,0;
+     1,0,0,0,0,0,0,1,0,0,0,0,0;
+     0,1,0,0,0,0,0,0,1,0,0,0,0;
+     0,0,1,0,0,0,0,0,0,1,0,0,0;
+     0,0,0,1,0,0,0,0,0,0,1,0,0;
+     0,0,0,0,1,0,0,0,0,0,0,1,0;
+     0,0,0,0,0,1,0,0,0,0,0,0,1];
+b = [10;2;1;1;4;10;1];
+zaum = [1:6];
 
-x = sym('x', [1,2]);
-f = 2*x(1)^2 + x(2)^2 - 14*x(1) - x(2) + 48;
-G = [2000*x(1) + 1000*x(2) - 12];
-
-# [x2, fc] = LagrangeOctave(f,G,x)
-[x2, fc] = KKTOctave(f,G,x)
+[x,v,optimal,B] = simplexInt(A,b,c,zaum);
+for i=1:length(x)
+    disp([B(i,:),' ',num2str(x(i))]);
+endfor
+disp(['optimal ',num2str(optimal)]);
 
 #{
 Zadanko 1
